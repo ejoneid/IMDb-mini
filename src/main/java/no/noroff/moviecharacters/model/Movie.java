@@ -1,8 +1,11 @@
 package no.noroff.moviecharacters.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name="movie")
@@ -40,9 +43,27 @@ public class Movie {
     )
     Set<Actor> actors;
 
+    @JsonGetter("characters")
+    public List<String> actors() {
+        if (actors != null) {
+            return actors.stream().map(actor -> {
+                return "/api/v1/characters/" + actor.getId();
+            }).collect(Collectors.toList());
+        }
+        return null;
+    }
+
     @ManyToOne
     @JoinColumn(name="franchise_id")
     private Franchise franchise;
+
+    @JsonGetter("franchise")
+    public String franchise() {
+        if (franchise != null) {
+            return "/api/v1/franchises/" + franchise.getId();
+        }
+        return null;
+    }
 
     public Movie(String title, String genre, int year, String director, String picture, String trailer) {
         this.title = title;
