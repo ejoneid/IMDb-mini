@@ -37,7 +37,7 @@ public class AppStartupRunner implements ApplicationRunner {
         // SAVE
         franchiseRepository.save(harryPotter);
         franchiseRepository.save(lordOfTheRings);
-/*
+
         ////////////////////
         //    MOVIES      //
         ////////////////////
@@ -89,6 +89,6 @@ public class AppStartupRunner implements ApplicationRunner {
         actorRepository.save(ianMcKellen);
         actorRepository.save(cateBlanchett);
         actorRepository.save(johnHurt);
-*/
+
     }
 }
