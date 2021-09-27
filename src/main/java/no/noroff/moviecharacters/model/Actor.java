@@ -1,7 +1,7 @@
 package no.noroff.moviecharacters.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="actor")
@@ -24,15 +24,55 @@ public class Actor {
     private String picture;
 
     // References to other tables
-/*
 
-    // Ble brått usikker på om det skal være mange til mange eller en til mange med actor/movie
-    // Lar begge stå bare.
-    @OneToMany
-    @JoinColumn(name="movie_id")
-    List<Movie> movies;
+    @ManyToMany(mappedBy = "actors")
+    Set<Movie> movies;
 
-    @ManyToMany(mappedBy = "movies")
-    public List<Movie> movies;
-*/
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
+    }
 }
