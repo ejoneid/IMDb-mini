@@ -23,6 +23,7 @@ public class Actor {
     @Column(name="picture")
     private String picture;
 
+
     // References to other tables
 /*
 
