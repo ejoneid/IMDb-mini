@@ -44,6 +44,19 @@ public class Movie {
     @JoinColumn(name="franchise_id")
     private Franchise franchise;
 
+    public Movie(String title, String genre, int year, String director, String picture, String trailer) {
+        this.title = title;
+        this.genre = genre;
+        this.year = year;
+        this.director = director;
+        this.picture = picture;
+        this.trailer = trailer;
+    }
+
+    public Movie() {
+
+    }
+
 
     public long getId() {
         return id;

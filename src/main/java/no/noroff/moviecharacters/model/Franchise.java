@@ -12,7 +12,7 @@ public class Franchise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name="name", nullable = false)
+    @Column(name="name")
     private String name;
 
     @Column(name="description")
@@ -22,6 +22,15 @@ public class Franchise {
 
     @OneToMany(mappedBy = "franchise")
     Set<Movie> movies;
+
+    public Franchise(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Franchise() {
+
+    }
 
     public long getId() {
         return id;

@@ -28,6 +28,17 @@ public class Actor {
     @ManyToMany(mappedBy = "actors")
     Set<Movie> movies;
 
+    public Actor(String name, String alias, String gender, String picture) {
+        this.name = name;
+        this.alias = alias;
+        this.gender = gender;
+        this.picture = picture;
+    }
+
+    public Actor() {
+
+    }
+
     public long getId() {
         return id;
     }
