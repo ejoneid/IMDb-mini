@@ -11,6 +11,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 @Component
 public class AppStartupRunner implements ApplicationRunner {
 
@@ -39,32 +41,6 @@ public class AppStartupRunner implements ApplicationRunner {
         franchiseRepository.save(lordOfTheRings);
 
         ////////////////////
-        //    MOVIES      //
-        ////////////////////
-
-        // HARRY POTTER
-        Movie hpPhilosophersStone = new Movie("Harry Potter and the Philosopher's Stone", "Fantasy", 2001, "Chris Columbus", "", "https://www.youtube.com/watch?v=VyHV0BRtdxo");
-        Movie hpChamberOfSecrets = new Movie("Harry Potter and the Chamber of Secrets", "Fantasy", 2002, "Chris Columbus", "", "https://www.youtube.com/watch?v=1bq0qff4iF8");
-        Movie hpDeathlyHallowsOne = new Movie("Harry Potter and the Deathly Hallows: Part 1", "Fantasy", 2010, "David Yates", "", "https://www.youtube.com/watch?v=MxqsmsA8y5k");
-        Movie hpDeathlyHallowsTwo = new Movie("Harry Potter and the Deathly Hallows: Part 2", "Fantasy", 2011, "David Yates", "", "https://www.youtube.com/watch?v=mObK5XD8udk");
-
-        // LORD OF THE RINGS
-        Movie lotrAnimated = new Movie("The Lord of the Rings", "Animation, Fantasy", 1978, "Ralph Bakshi", "", "https://www.youtube.com/watch?v=Y46VsU2RhrM");
-        Movie lotrFellowshipOfTheRing = new Movie("The Lord of the Rings: Fellowship of the Ring", "Fantasy", 2001, "Peter Jackson", "", "https://www.youtube.com/watch?v=V75dMMIW2B4");
-        Movie lotrTheTwoTowers = new Movie("The Lord of the Rings: The Two Towers", "Fantasy", 2002, "Peter Jackson", "", "https://www.youtube.com/watch?v=LbfMDwc4azU");
-        Movie lotrReturnOfTheKing = new Movie("The Lord of the Rings: Return of the King", "Fantasy", 2003, "Peter Jackson", "", "https://www.youtube.com/watch?v=LbfMDwc4azU");
-
-        // SAVE
-        movieRepository.save(hpPhilosophersStone);
-        movieRepository.save(hpChamberOfSecrets);
-        movieRepository.save(hpDeathlyHallowsOne);
-        movieRepository.save(hpDeathlyHallowsTwo);
-        movieRepository.save(lotrAnimated);
-        movieRepository.save(lotrFellowshipOfTheRing);
-        movieRepository.save(lotrTheTwoTowers);
-        movieRepository.save(lotrReturnOfTheKing);
-
-        ////////////////////
         //    ACTORS      //
         ////////////////////
 
@@ -89,6 +65,44 @@ public class AppStartupRunner implements ApplicationRunner {
         actorRepository.save(ianMcKellen);
         actorRepository.save(cateBlanchett);
         actorRepository.save(johnHurt);
+
+        ////////////////////
+        //    MOVIES      //
+        ////////////////////
+
+        // HARRY POTTER
+        Movie hpPhilosophersStone = new Movie(
+                "Harry Potter and the Philosopher's Stone",
+                "Fantasy",
+                2001,
+                "Chris Columbus",
+                "",
+                "https://www.youtube.com/watch?v=VyHV0BRtdxo",
+                Arrays.asList(danielRadcliffe, emmaWatson, rupertGrint),
+                harryPotter
+        );
+        Movie hpChamberOfSecrets = new Movie("Harry Potter and the Chamber of Secrets", "Fantasy", 2002, "Chris Columbus", "", "https://www.youtube.com/watch?v=1bq0qff4iF8", Arrays.asList(danielRadcliffe, emmaWatson, rupertGrint),
+                harryPotter);
+        Movie hpDeathlyHallowsOne = new Movie("Harry Potter and the Deathly Hallows: Part 1", "Fantasy", 2010, "David Yates", "", "https://www.youtube.com/watch?v=MxqsmsA8y5k", Arrays.asList(danielRadcliffe, emmaWatson, rupertGrint),
+                harryPotter);
+        Movie hpDeathlyHallowsTwo = new Movie("Harry Potter and the Deathly Hallows: Part 2", "Fantasy", 2011, "David Yates", "", "https://www.youtube.com/watch?v=mObK5XD8udk", Arrays.asList(danielRadcliffe, emmaWatson, rupertGrint),
+                harryPotter);
+
+        // LORD OF THE RINGS
+        Movie lotrAnimated = new Movie("The Lord of the Rings", "Animation, Fantasy", 1978, "Ralph Bakshi", "", "https://www.youtube.com/watch?v=Y46VsU2RhrM", Arrays.asList( johnHurt), lordOfTheRings);
+        Movie lotrFellowshipOfTheRing = new Movie("The Lord of the Rings: Fellowship of the Ring", "Fantasy", 2001, "Peter Jackson", "", "https://www.youtube.com/watch?v=V75dMMIW2B4", Arrays.asList(elijahWood, ianMcKellen, cateBlanchett), lordOfTheRings);
+        Movie lotrTheTwoTowers = new Movie("The Lord of the Rings: The Two Towers", "Fantasy", 2002, "Peter Jackson", "", "https://www.youtube.com/watch?v=LbfMDwc4azU", Arrays.asList(elijahWood, ianMcKellen, cateBlanchett), lordOfTheRings);
+        Movie lotrReturnOfTheKing = new Movie("The Lord of the Rings: Return of the King", "Fantasy", 2003, "Peter Jackson", "", "https://www.youtube.com/watch?v=LbfMDwc4azU", Arrays.asList(elijahWood, ianMcKellen, cateBlanchett), lordOfTheRings);
+
+        // SAVE
+        movieRepository.save(hpPhilosophersStone);
+        movieRepository.save(hpChamberOfSecrets);
+        movieRepository.save(hpDeathlyHallowsOne);
+        movieRepository.save(hpDeathlyHallowsTwo);
+        movieRepository.save(lotrAnimated);
+        movieRepository.save(lotrFellowshipOfTheRing);
+        movieRepository.save(lotrTheTwoTowers);
+        movieRepository.save(lotrReturnOfTheKing);
 
     }
 }

@@ -40,6 +40,12 @@ public class Franchise {
         this.description = description;
     }
 
+    public Franchise(String name, String description, List<Movie> movies) {
+        this.name = name;
+        this.description = description;
+        this.movies = movies;
+    }
+
     public Franchise() {
 
     }

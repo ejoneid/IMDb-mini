@@ -49,6 +49,14 @@ public class Actor {
         this.picture = picture;
     }
 
+    public Actor(String name, String alias, String gender, String picture, List<Movie> movies) {
+        this.name = name;
+        this.alias = alias;
+        this.gender = gender;
+        this.picture = picture;
+        this.movies = movies;
+    }
+
     public Actor() {
 
     }
