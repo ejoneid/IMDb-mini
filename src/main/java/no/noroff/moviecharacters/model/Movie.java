@@ -44,6 +44,13 @@ public class Movie {
     @JoinColumn(name="franchise_id")
     private Franchise franchise;
 
+    public Movie(String name, String genre, int year, String director, String picture, String trailer) {
+    }
+
+    public Movie() {
+
+    }
+
 
     public long getId() {
         return id;

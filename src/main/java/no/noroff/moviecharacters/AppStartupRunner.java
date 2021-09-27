@@ -29,15 +29,15 @@ public class AppStartupRunner implements ApplicationRunner {
         ////////////////////
 
         // HARRY POTTER
-        Franchise harryPotter = new Franchise("Harry Potter", "All the Harry Potter movies are based off of J.K Rowlings best selling Harry potter book-series. The story follows Harry Potter through seven years at Hogwarts with his friends Ronny and Hermione, facing challenges that can change the wizarding world forever.");
+        Franchise harryPotter = new Franchise("Harry Potter", "All the Harry Potter movies are based off of J.K Rowlings best selling Harry potter book-series.");
 
         // LORD OF THE RINGS
-        Franchise lordOfTheRings = new Franchise("The Lord of the Rings", "Lord of the Rings are written by J.R.R Tolkien, it follows Gandalf, Frodo, Aragorn, Sam, Legolas and more as they try to destroy a mighty ring by bringing it to Mount Doom. The journey is not as easy as they might have hoped.")
+        Franchise lordOfTheRings = new Franchise("The Lord of the Rings", "Lord of the Rings are written by J.R.R Tolkien");
 
         // SAVE
         franchiseRepository.save(harryPotter);
         franchiseRepository.save(lordOfTheRings);
-
+/*
         ////////////////////
         //    MOVIES      //
         ////////////////////
@@ -89,6 +89,6 @@ public class AppStartupRunner implements ApplicationRunner {
         actorRepository.save(ianMcKellen);
         actorRepository.save(cateBlanchett);
         actorRepository.save(johnHurt);
-
+*/
     }
 }
