@@ -2,6 +2,7 @@ package no.noroff.moviecharacters.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="franchise")
@@ -18,8 +19,8 @@ public class Franchise {
     private String description;
 
     //References to other tables
-/*
-    @OneToMany(mappedBy = "movie")
-    List<Movie> movies;
-*/
+
+    @OneToMany(mappedBy = "franchise")
+    Set<Movie> movies;
+
 }

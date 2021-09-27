@@ -2,6 +2,7 @@ package no.noroff.moviecharacters.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="movie")
@@ -28,15 +29,8 @@ public class Movie {
     @Column(name="trailer")
     private String trailer;
 
+
     // References to other tables
-
-  /*
-
-    // Ble brått usikker på de to under her som har med actor å gjøre, om det skal være
-    // one to many eller many to many. Lar derfor begge stå bare.
-    @OneToMany
-    @JoinColumn(name="actor_id")
-    List<Actor> actors;
 
     @ManyToMany
     @JoinTable(
@@ -44,10 +38,10 @@ public class Movie {
             joinColumns = {@JoinColumn(name="actor_id")},
             inverseJoinColumns = {@JoinColumn(name="movie_id")}
     )
-    public List<Actor> actors;
+    Set<Actor> actors;
 
     @ManyToOne
     @JoinColumn(name="franchise_id")
     private Franchise franchise;
-*/
+
 }
