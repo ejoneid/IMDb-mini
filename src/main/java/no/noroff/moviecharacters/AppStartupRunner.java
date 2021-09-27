@@ -3,6 +3,10 @@ package no.noroff.moviecharacters;
 import no.noroff.moviecharacters.model.Actor;
 import no.noroff.moviecharacters.model.Franchise;
 import no.noroff.moviecharacters.model.Movie;
+import no.noroff.moviecharacters.repositories.ActorRepository;
+import no.noroff.moviecharacters.repositories.FranchiseRepository;
+import no.noroff.moviecharacters.repositories.MovieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -10,14 +14,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppStartupRunner implements ApplicationRunner {
 
+    @Autowired
+    private FranchiseRepository franchiseRepository;
+    @Autowired
+    private MovieRepository movieRepository;
+    @Autowired
+    private ActorRepository actorRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("REMEMBER TO COMMENT OUT CODE IN APPSTARTUPRUNNER");
-        /*
+
         ////////////////////
         //   FRANCHISES   //
         ////////////////////
-        FranchiseRepositoryImpl franchiseRepository = new FranchiseRepositoryImpl();
 
         // HARRY POTTER
         Franchise harryPotter = new Franchise("Harry Potter", "All the Harry Potter movies are based off of J.K Rowlings best selling Harry potter book-series. The story follows Harry Potter through seven years at Hogwarts with his friends Ronny and Hermione, facing challenges that can change the wizarding world forever.");
@@ -32,7 +41,6 @@ public class AppStartupRunner implements ApplicationRunner {
         ////////////////////
         //    MOVIES      //
         ////////////////////
-        MovieRepositoryImpl movieRepository = new MovieRepositoryImpl();
 
         // HARRY POTTER
         Movie hpPhilosophersStone = new Movie("Harry Potter and the Philosopher's Stone", "Fantasy", 2001, "Chris Columbus", "", "https://www.youtube.com/watch?v=VyHV0BRtdxo");
@@ -59,7 +67,6 @@ public class AppStartupRunner implements ApplicationRunner {
         ////////////////////
         //    ACTORS      //
         ////////////////////
-        ActorRepositoryImpl actorRepository = new ActorRepositoryImpl();
 
         // HARRY POTTER
         Actor danielRadcliffe = new Actor("Daniel Radcliffe", "Dan Radcliffe", "Male", "https://m.media-amazon.com/images/M/MV5BZmE0NzNiNzQtYTVlYS00MjljLWE4MTgtYzYxNjU2NjZkM2M4XkEyXkFqcGdeQXVyNjY5NDgzNjQ@._V1_UX214_CR0,0,214,317_AL_.jpg");
@@ -75,14 +82,13 @@ public class AppStartupRunner implements ApplicationRunner {
         Actor johnHurt = new Actor("John Hurt", "", "Male", "https://m.media-amazon.com/images/M/MV5BMTM1NTgyMTAyOV5BMl5BanBnXkFtZTcwMTE4MjQwNA@@._V1_UY317_CR5,0,214,317_AL_.jpg");
 
         // SAVE
-        actorRepository(danielRadcliffe);
-        actorRepository(rupertGrint);
-        actorRepository(emmaWatson);
-        actorRepository(elijahWood);
-        actorRepository(ianMcKellen);
-        actorRepository(orlandoBloom);
-        actorRepository(cateBlanchett);
-        actorRepository(johnHurt);
-        */
+        actorRepository.save(danielRadcliffe);
+        actorRepository.save(rupertGrint);
+        actorRepository.save(emmaWatson);
+        actorRepository.save(elijahWood);
+        actorRepository.save(ianMcKellen);
+        actorRepository.save(cateBlanchett);
+        actorRepository.save(johnHurt);
+
     }
 }
