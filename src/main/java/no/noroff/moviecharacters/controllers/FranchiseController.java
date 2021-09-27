@@ -18,45 +18,59 @@ public class FranchiseController {
     private FranchiseRepository franchiseRepository;
 
     @GetMapping
-    public ResponseEntity<List<Franchise>> getAllMovies() {
-        List<Franchise> movies = franchiseRepository.findAll();
+    public ResponseEntity<List<Franchise>> getAllFranchises() {
+        List<Franchise> franchises = franchiseRepository.findAll();
         HttpStatus status = HttpStatus.OK;
-        return new ResponseEntity<>(movies, status);
+        return new ResponseEntity<>(franchises, status);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Franchise> getMovie(@PathVariable Long id) {
-        Franchise returnMovie = new Franchise();
+    public ResponseEntity<Franchise> getFranchise(@PathVariable Long id) {
+        Franchise returnFranchise = new Franchise();
         HttpStatus status;
 
         if (franchiseRepository.existsById(id)) {
             status = HttpStatus.OK;
-            returnMovie = franchiseRepository.findById(id).get();
+            returnFranchise = franchiseRepository.findById(id).get();
         }
         else {
             status = HttpStatus.NOT_FOUND;
         }
-        return new ResponseEntity<>(returnMovie, status);
+        return new ResponseEntity<>(returnFranchise, status);
     }
 
     @PostMapping
-    public ResponseEntity<Franchise> addMovie(@RequestBody Franchise franchise) {
-        Franchise returnMovie = franchiseRepository.save(franchise);
+    public ResponseEntity<Franchise> addFranchise(@RequestBody Franchise franchise) {
+        Franchise returnFranchise = franchiseRepository.save(franchise);
         HttpStatus status = HttpStatus.CREATED;
-        return new ResponseEntity<>(returnMovie, status);
+        return new ResponseEntity<>(returnFranchise, status);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Franchise> updateMovie(@PathVariable Long id, @RequestBody Franchise franchise) {
-        Franchise returnMovie = new Franchise();
+    public ResponseEntity<Franchise> updateFranchise(@PathVariable Long id, @RequestBody Franchise franchise) {
+        Franchise returnFranchise = new Franchise();
         HttpStatus status;
 
         if (!id.equals(franchise.getId())) {
             status = HttpStatus.BAD_REQUEST;
-            return new ResponseEntity<>(returnMovie, status);
+            return new ResponseEntity<>(returnFranchise, status);
         }
-        returnMovie = franchiseRepository.save(franchise);
+        returnFranchise = franchiseRepository.save(franchise);
         status = HttpStatus.NO_CONTENT;
-        return new ResponseEntity<>(returnMovie, status);
+        return new ResponseEntity<>(returnFranchise, status);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Franchise> deleteFranchise(@PathVariable Long id) {
+        Franchise returnFranchise = new Franchise();
+        HttpStatus status;
+
+        if (!franchiseRepository.existsById(id)) {
+            status = HttpStatus.NOT_FOUND;
+            return new ResponseEntity<>(returnFranchise, status);
+        }
+        franchiseRepository.deleteById(id);
+        status = HttpStatus.NO_CONTENT;
+        return new ResponseEntity<>(returnFranchise, status);
     }
 }

@@ -1,6 +1,7 @@
 package no.noroff.moviecharacters.controllers;
 
 import no.noroff.moviecharacters.model.Actor;
+import no.noroff.moviecharacters.model.Movie;
 import no.noroff.moviecharacters.repositories.ActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,6 +57,20 @@ public class ActorController {
             return new ResponseEntity<>(returnActor, status);
         }
         returnActor = actorRepository.save(actor);
+        status = HttpStatus.NO_CONTENT;
+        return new ResponseEntity<>(returnActor, status);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Actor> deleteActor(@PathVariable Long id) {
+        Actor returnActor = new Actor();
+        HttpStatus status;
+
+        if (!actorRepository.existsById(id)) {
+            status = HttpStatus.NOT_FOUND;
+            return new ResponseEntity<>(returnActor, status);
+        }
+        actorRepository.deleteById(id);
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnActor, status);
     }
