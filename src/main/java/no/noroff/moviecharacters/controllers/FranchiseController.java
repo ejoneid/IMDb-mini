@@ -1,7 +1,9 @@
 package no.noroff.moviecharacters.controllers;
 
 import no.noroff.moviecharacters.model.Franchise;
+import no.noroff.moviecharacters.model.Movie;
 import no.noroff.moviecharacters.repositories.FranchiseRepository;
+import no.noroff.moviecharacters.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,9 @@ public class FranchiseController {
 
     @Autowired
     private FranchiseRepository franchiseRepository;
+
+    @Autowired
+    private MovieRepository movieRepository;
 
     @GetMapping
     public ResponseEntity<List<Franchise>> getAllFranchises() {
@@ -59,6 +64,26 @@ public class FranchiseController {
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnFranchise, status);
     }
+
+    @PutMapping("/{id}/movies")
+    public ResponseEntity<Franchise> updateMoviesInFranchise(@PathVariable Long id, @RequestBody List<Long> movieIds) {
+        Franchise returnFranchise = new Franchise();
+        HttpStatus status;
+
+        if (franchiseRepository.existsById(id)) {
+            Franchise franchise = franchiseRepository.getById(id);
+            List<Movie> moviesToAdd = movieRepository.findAllById(movieIds);
+            franchise.getMovies().addAll(moviesToAdd);
+            returnFranchise = franchiseRepository.save(franchise);
+            status = HttpStatus.NO_CONTENT;
+        }
+        else {
+            status = HttpStatus.NOT_FOUND;
+        }
+
+        return new ResponseEntity<>(returnFranchise, status);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Franchise> deleteFranchise(@PathVariable Long id) {
