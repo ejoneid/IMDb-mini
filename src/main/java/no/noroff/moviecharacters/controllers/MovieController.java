@@ -1,7 +1,8 @@
 package no.noroff.moviecharacters.controllers;
 
-import no.noroff.moviecharacters.model.Franchise;
+import no.noroff.moviecharacters.model.Actor;
 import no.noroff.moviecharacters.model.Movie;
+import no.noroff.moviecharacters.repositories.ActorRepository;
 import no.noroff.moviecharacters.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,9 @@ public class MovieController {
 
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
+    private ActorRepository actorRepository;
 
     @GetMapping
     public ResponseEntity<List<Movie>> getAllMovies() {
@@ -58,6 +62,25 @@ public class MovieController {
         }
         returnMovie = movieRepository.save(movie);
         status = HttpStatus.NO_CONTENT;
+        return new ResponseEntity<>(returnMovie, status);
+    }
+
+    @PutMapping("/{id}/characters")
+    public ResponseEntity<Movie> updateCharactersInMovie(@PathVariable Long id, @RequestBody List<Long> characterIds) {
+        Movie returnMovie = new Movie();
+        HttpStatus status;
+
+        if (movieRepository.existsById(id)) {
+            Movie movie = movieRepository.getById(id);
+            List<Actor> characterToAdd = actorRepository.findAllById(characterIds);
+            movie.getActors().addAll(characterToAdd);
+            returnMovie = movieRepository.save(movie);
+            status = HttpStatus.NO_CONTENT;
+        }
+        else {
+            status = HttpStatus.NOT_FOUND;
+        }
+
         return new ResponseEntity<>(returnMovie, status);
     }
 
