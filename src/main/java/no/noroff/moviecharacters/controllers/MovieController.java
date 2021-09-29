@@ -63,6 +63,14 @@ public class MovieController {
     }
 
 
+    @Operation(summary = "Get all characters in a movie by the movie id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the movie",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Actor.class)) }),
+            @ApiResponse(responseCode = "404", description = "Did not find the movie",
+                    content = @Content),
+    })
     @GetMapping("/{id}/characters")
     public ResponseEntity<Set<Actor>> getCharactersInMovie(@PathVariable Long id)throws Exception {
         Set<Actor> actors = null;

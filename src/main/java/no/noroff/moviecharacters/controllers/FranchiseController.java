@@ -65,6 +65,14 @@ public class FranchiseController {
     }
 
 
+    @Operation(summary = "Get all movies in a franchise by the franchise id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the franchise",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Movie.class)) }),
+            @ApiResponse(responseCode = "404", description = "Did not find the franchise",
+                    content = @Content),
+    })
     @GetMapping("/{id}/movies")
     public ResponseEntity<Set<Movie>> getMoviesInFranchise(@PathVariable Long id) {
         Set<Movie> movies = null;
@@ -80,6 +88,15 @@ public class FranchiseController {
         return new ResponseEntity<>(movies, status);
     }
 
+
+    @Operation(summary = "Get all characters in a franchise by the franchise id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the franchise",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Actor.class)) }),
+            @ApiResponse(responseCode = "404", description = "Did not find the franchise",
+                    content = @Content),
+    })
     @GetMapping("/{id}/characters")
     public ResponseEntity<Set<Actor>> getCharactersInFranchise(@PathVariable Long id) {
         Set<Actor> actors = null;
