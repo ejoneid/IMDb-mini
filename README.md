@@ -32,4 +32,4 @@ test the API.
 
 ### Dataflow
 
-![Dataflow in the application[(https://gitlab.com/EirikJoneid/assignment3/-/blob/master/dataflow.png)
+![Dataflow in the application](https://gitlab.com/EirikJoneid/assignment3/-/raw/readme&varchar/dataflow.png)
