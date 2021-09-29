@@ -3,6 +3,7 @@ package no.noroff.moviecharacters.model;
 import com.fasterxml.jackson.annotation.JsonGetter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,15 +15,19 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
     @Column(name="title", nullable = false)
     private String title;
 
+    @NotNull
     @Column(name="genre", nullable = false)
     private String genre; //Lists gave me an error, has this as a string for now.
 
+    @NotNull
     @Column(name="year", nullable = false)
     private int year;
 
+    @NotNull
     @Column(name="director", nullable = false)
     private String director;
 

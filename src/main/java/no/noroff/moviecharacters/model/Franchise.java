@@ -3,6 +3,7 @@ package no.noroff.moviecharacters.model;
 import com.fasterxml.jackson.annotation.JsonGetter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,7 +16,8 @@ public class Franchise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name="name")
+    @NotNull
+    @Column(name="name", nullable = false)
     private String name;
 
     @Column(name="description")
@@ -40,13 +42,6 @@ public class Franchise {
         this.id = id;
         this.name = name;
         this.description = description;
-    }
-
-    public Franchise(long id, String name, String description, Set<Movie> movies) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.movies = movies;
     }
 
     public Franchise() {
