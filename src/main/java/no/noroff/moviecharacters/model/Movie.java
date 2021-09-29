@@ -41,7 +41,7 @@ public class Movie {
             joinColumns = {@JoinColumn(name="actor_id")},
             inverseJoinColumns = {@JoinColumn(name="movie_id")}
     )
-    List<Actor> actors;
+    Set<Actor> actors;
 
     @JsonGetter("characters")
     public List<String> actors() {
@@ -65,16 +65,8 @@ public class Movie {
         return null;
     }
 
-    public Movie(String title, String genre, int year, String director, String picture, String trailer) {
-        this.title = title;
-        this.genre = genre;
-        this.year = year;
-        this.director = director;
-        this.picture = picture;
-        this.trailer = trailer;
-    }
-
-    public Movie(String title, String genre, int year, String director, String picture, String trailer, List<Actor> actors, Franchise franchise) {
+    public Movie(long id, String title, String genre, int year, String director, String picture, String trailer, Set<Actor> actors, Franchise franchise) {
+        this.id = id;
         this.title = title;
         this.genre = genre;
         this.year = year;
@@ -146,11 +138,11 @@ public class Movie {
         this.trailer = trailer;
     }
 
-    public List<Actor> getActors() {
+    public Set<Actor> getActors() {
         return actors;
     }
 
-    public void setActors(List<Actor> actors) {
+    public void setActors(Set<Actor> actors) {
         this.actors = actors;
     }
 
