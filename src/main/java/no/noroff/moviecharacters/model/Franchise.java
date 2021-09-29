@@ -17,10 +17,10 @@ public class Franchise {
     private long id;
 
     @NotNull
-    @Column(name="name", nullable = false)
+    @Column(name="name", nullable = false, length = 150)
     private String name;
 
-    @Column(name="description")
+    @Column(name="description", length = 400)
     private String description;
 
     //References to other tables
