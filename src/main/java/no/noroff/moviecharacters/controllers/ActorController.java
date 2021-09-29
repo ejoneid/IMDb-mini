@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import no.noroff.moviecharacters.model.Actor;
 import no.noroff.moviecharacters.model.Movie;
 import no.noroff.moviecharacters.repositories.ActorRepository;
+import no.noroff.moviecharacters.services.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,8 @@ public class ActorController {
     @Autowired
     private ActorRepository actorRepository;
 
-
+    @Autowired
+    private ActorService actorService;
 
     @Operation(summary = "Get all characters")
     @GetMapping
@@ -114,6 +116,7 @@ public class ActorController {
             status = HttpStatus.NOT_FOUND;
             return new ResponseEntity<>(returnActor, status);
         }
+        actorService.deleteMovieReferences(id);
         actorRepository.deleteById(id);
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnActor, status);
