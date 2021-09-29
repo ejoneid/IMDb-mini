@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -23,7 +24,7 @@ public class Franchise {
     //References to other tables
 
     @OneToMany(mappedBy = "franchise")
-    List<Movie> movies;
+    Set<Movie> movies;
 
     @JsonGetter("movies")
     public List<String> movies() {
@@ -35,12 +36,14 @@ public class Franchise {
         return null;
     }
 
-    public Franchise(String name, String description) {
+    public Franchise(long id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
     }
 
-    public Franchise(String name, String description, List<Movie> movies) {
+    public Franchise(long id, String name, String description, Set<Movie> movies) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.movies = movies;
@@ -74,11 +77,11 @@ public class Franchise {
         this.description = description;
     }
 
-    public List<Movie> getMovies() {
+    public Set<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(List<Movie> movies) {
+    public void setMovies(Set<Movie> movies) {
         this.movies = movies;
     }
 }

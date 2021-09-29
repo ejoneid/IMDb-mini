@@ -30,7 +30,7 @@ public class Actor {
     // References to other tables
 
     @ManyToMany(mappedBy = "actors")
-    List<Movie> movies;
+    Set<Movie> movies;
 
     @JsonGetter("movies")
     public List<String> movies() {
@@ -42,19 +42,12 @@ public class Actor {
         return null;
     }
 
-    public Actor(String name, String alias, String gender, String picture) {
+    public Actor(long id, String name, String alias, String gender, String picture) {
+        this.id = id;
         this.name = name;
         this.alias = alias;
         this.gender = gender;
         this.picture = picture;
-    }
-
-    public Actor(String name, String alias, String gender, String picture, List<Movie> movies) {
-        this.name = name;
-        this.alias = alias;
-        this.gender = gender;
-        this.picture = picture;
-        this.movies = movies;
     }
 
     public Actor() {
@@ -101,11 +94,11 @@ public class Actor {
         this.picture = picture;
     }
 
-    public List<Movie> getMovies() {
+    public Set<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(List<Movie> movies) {
+    public void setMovies(Set<Movie> movies) {
         this.movies = movies;
     }
 }
