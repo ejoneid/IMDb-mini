@@ -5,16 +5,20 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import no.noroff.moviecharacters.model.Actor;
 import no.noroff.moviecharacters.model.Franchise;
 import no.noroff.moviecharacters.model.Movie;
 import no.noroff.moviecharacters.repositories.FranchiseRepository;
 import no.noroff.moviecharacters.repositories.MovieRepository;
+import no.noroff.moviecharacters.services.FranchiseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -25,7 +29,7 @@ public class FranchiseController {
     private FranchiseRepository franchiseRepository;
 
     @Autowired
-    private MovieRepository movieRepository;
+    private FranchiseService franchiseService;
 
 
     @Operation(summary = "Get all franchises")
@@ -58,6 +62,37 @@ public class FranchiseController {
             status = HttpStatus.NOT_FOUND;
         }
         return new ResponseEntity<>(returnFranchise, status);
+    }
+
+
+    @GetMapping("/{id}/movies")
+    public ResponseEntity<Set<Movie>> getMoviesInFranchise(@PathVariable Long id) {
+        Set<Movie> movies = null;
+        HttpStatus status;
+
+        if (franchiseRepository.existsById(id)) {
+            status = HttpStatus.OK;
+            movies = franchiseService.getMoviesInFranchise(id);
+        }
+        else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(movies, status);
+    }
+
+    @GetMapping("/{id}/characters")
+    public ResponseEntity<Set<Actor>> getCharactersInFranchise(@PathVariable Long id) {
+        Set<Actor> actors = null;
+        HttpStatus status;
+
+        if (franchiseRepository.existsById(id)) {
+            status = HttpStatus.OK;
+            actors = franchiseService.getAllCharactersInFranchise(id);
+        }
+        else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(actors, status);
     }
 
 
@@ -115,11 +150,8 @@ public class FranchiseController {
         HttpStatus status;
 
         if (franchiseRepository.existsById(id)) {
-            Franchise franchise = franchiseRepository.getById(id);
-            List<Movie> moviesToAdd = movieRepository.findAllById(movieIds);
-            franchise.getMovies().addAll(moviesToAdd);
-            returnFranchise = franchiseRepository.save(franchise);
-            status = HttpStatus.NO_CONTENT;
+            returnFranchise = franchiseService.updateMoviesInFranchise(id, movieIds);
+            status = HttpStatus.OK;
         }
         else {
             status = HttpStatus.NOT_FOUND;

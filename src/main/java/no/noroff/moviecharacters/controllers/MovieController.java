@@ -9,12 +9,14 @@ import no.noroff.moviecharacters.model.Actor;
 import no.noroff.moviecharacters.model.Movie;
 import no.noroff.moviecharacters.repositories.ActorRepository;
 import no.noroff.moviecharacters.repositories.MovieRepository;
+import no.noroff.moviecharacters.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -25,7 +27,7 @@ public class MovieController {
     private MovieRepository movieRepository;
 
     @Autowired
-    private ActorRepository actorRepository;
+    private MovieService movieService;
 
 
     @Operation(summary = "Get all movies")
@@ -58,6 +60,21 @@ public class MovieController {
             status = HttpStatus.NOT_FOUND;
         }
         return new ResponseEntity<>(returnMovie, status);
+    }
+
+
+    @GetMapping("/{id}/characters")
+    public ResponseEntity<Set<Actor>> getCharactersInMovie(@PathVariable Long id)throws Exception {
+        Set<Actor> actors = null;
+        HttpStatus status;
+
+        if(movieRepository.existsById(id)) {
+            status = HttpStatus.OK;
+            actors = movieService.getCharactersInMovie(id);
+        } else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(actors, status);
     }
 
 
@@ -118,10 +135,7 @@ public class MovieController {
         HttpStatus status;
 
         if (movieRepository.existsById(id)) {
-            Movie movie = movieRepository.getById(id);
-            List<Actor> characterToAdd = actorRepository.findAllById(characterIds);
-            movie.getActors().addAll(characterToAdd);
-            returnMovie = movieRepository.save(movie);
+            returnMovie = movieService.updateCharactersInMovie(id, characterIds);
             status = HttpStatus.NO_CONTENT;
         }
         else {

@@ -81,7 +81,7 @@ public class AppStartupRunner implements ApplicationRunner {
                 harryPotter);
 
         // LORD OF THE RINGS
-        Movie lotrAnimated = new Movie(4, "The Lord of the Rings", "Animation, Fantasy", 1978, "Ralph Bakshi", "", "https://www.youtube.com/watch?v=Y46VsU2RhrM", Set.of( johnHurt), lordOfTheRings);
+        Movie lotrAnimated = new Movie(4, "The Lord of the Rings", "Animation, Fantasy", 1978, "Ralph Bakshi", "", "https://www.youtube.com/watch?v=Y46VsU2RhrM", Set.of(johnHurt), lordOfTheRings);
         Movie lotrFellowshipOfTheRing = new Movie(5, "The Lord of the Rings: Fellowship of the Ring", "Fantasy", 2001, "Peter Jackson", "", "https://www.youtube.com/watch?v=V75dMMIW2B4", Set.of(elijahWood, ianMcKellen, cateBlanchett), lordOfTheRings);
         Movie lotrTheTwoTowers = new Movie(6, "The Lord of the Rings: The Two Towers", "Fantasy", 2002, "Peter Jackson", "", "https://www.youtube.com/watch?v=LbfMDwc4azU", Set.of(elijahWood, ianMcKellen, cateBlanchett), lordOfTheRings);
         Movie lotrReturnOfTheKing = new Movie(7, "The Lord of the Rings: Return of the King", "Fantasy", 2003, "Peter Jackson", "", "https://www.youtube.com/watch?v=LbfMDwc4azU", Set.of(elijahWood, ianMcKellen, cateBlanchett), lordOfTheRings);
@@ -96,6 +96,10 @@ public class AppStartupRunner implements ApplicationRunner {
                 Set.of(danielRadcliffe, emmaWatson, rupertGrint),
                 harryPotter
         );
+
+        hpPhilosophersStone.setFranchise(harryPotter);
+        lotrAnimated.setFranchise(lordOfTheRings);
+        lotrAnimated.setActors(Set.of(johnHurt));
 
         // SAVE
         movieRepository.save(hpPhilosophersStone);
