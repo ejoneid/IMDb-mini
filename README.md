@@ -1,5 +1,4 @@
 - Link to Swagger and/or other relevant links.
-- Add a picture of the data flow either directly to the readme or a separate file in root of project.
 
 # Assignment 2 - IMDb-mini
 
