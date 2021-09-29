@@ -1,5 +1,10 @@
 package no.noroff.moviecharacters.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import no.noroff.moviecharacters.model.Actor;
 import no.noroff.moviecharacters.model.Movie;
 import no.noroff.moviecharacters.repositories.ActorRepository;
@@ -22,6 +27,8 @@ public class MovieController {
     @Autowired
     private ActorRepository actorRepository;
 
+
+    @Operation(summary = "Get all movies")
     @GetMapping
     public ResponseEntity<List<Movie>> getAllMovies() {
         List<Movie> movies = movieRepository.findAll();
@@ -29,6 +36,15 @@ public class MovieController {
         return new ResponseEntity<>(movies, status);
     }
 
+
+    @Operation(summary = "Get a movie by its id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the movie",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Movie.class)) }),
+            @ApiResponse(responseCode = "404", description = "Did not find the movie",
+                    content = @Content),
+    })
     @GetMapping("/{id}")
     public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
         Movie returnMovie = new Movie();
@@ -44,6 +60,15 @@ public class MovieController {
         return new ResponseEntity<>(returnMovie, status);
     }
 
+
+    @Operation(summary = "Add a movie")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created the movie",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Movie.class)) }),
+            @ApiResponse(responseCode = "400", description = "Bad syntax in request",
+                    content = @Content),
+    })
     @PostMapping
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
         Movie returnMovie = movieRepository.save(movie);
@@ -51,6 +76,17 @@ public class MovieController {
         return new ResponseEntity<>(returnMovie, status);
     }
 
+
+    @Operation(summary = "Update a movie by its id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Updated the movie",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Movie.class)) }),
+            @ApiResponse(responseCode = "400", description = "Bad syntax in request",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Did not find the movie",
+                    content = @Content)
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
         Movie returnMovie = new Movie();
@@ -65,6 +101,17 @@ public class MovieController {
         return new ResponseEntity<>(returnMovie, status);
     }
 
+
+    @Operation(summary = "Update the characters in a movie")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Updated the movie",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Movie.class)) }),
+            @ApiResponse(responseCode = "400", description = "Bad syntax in request",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Did not find the movie",
+                    content = @Content)
+    })
     @PutMapping("/{id}/characters")
     public ResponseEntity<Movie> updateCharactersInMovie(@PathVariable Long id, @RequestBody List<Long> characterIds) {
         Movie returnMovie = new Movie();
@@ -84,6 +131,16 @@ public class MovieController {
         return new ResponseEntity<>(returnMovie, status);
     }
 
+
+    @Operation(summary = "Delete a movie by its id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Deleted the movie successfully",
+                    content = @Content),
+            @ApiResponse(responseCode = "400", description = "Request contains bad syntax",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Did not find the movie",
+                    content = @Content),
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Movie> deleteMovie(@PathVariable Long id) {
         Movie returnMovie = new Movie();

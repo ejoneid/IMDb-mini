@@ -37,9 +37,9 @@ public class FranchiseController {
     }
 
 
-    @Operation(summary = "Get a franchises by its id")
+    @Operation(summary = "Get a franchise by its id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Found the franchises",
+            @ApiResponse(responseCode = "200", description = "Found the franchise",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Franchise.class)) }),
             @ApiResponse(responseCode = "404", description = "Did not find the franchise",
@@ -61,9 +61,9 @@ public class FranchiseController {
     }
 
 
-    @Operation(summary = "Add a franchises")
+    @Operation(summary = "Add a franchise")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Created the character",
+            @ApiResponse(responseCode = "201", description = "Created the franchise",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Franchise.class)) }),
             @ApiResponse(responseCode = "400", description = "Request contains bad syntax",
@@ -79,7 +79,7 @@ public class FranchiseController {
 
     @Operation(summary = "Update a franchise by its id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Updated the character",
+            @ApiResponse(responseCode = "204", description = "Updated the franchise",
                     content = @Content),
             @ApiResponse(responseCode = "400", description = "Request contains bad syntax",
                     content = @Content),
