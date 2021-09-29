@@ -1,5 +1,10 @@
 package no.noroff.moviecharacters.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import no.noroff.moviecharacters.model.Franchise;
 import no.noroff.moviecharacters.model.Movie;
 import no.noroff.moviecharacters.repositories.FranchiseRepository;
@@ -22,6 +27,8 @@ public class FranchiseController {
     @Autowired
     private MovieRepository movieRepository;
 
+
+    @Operation(summary = "Get all franchises")
     @GetMapping
     public ResponseEntity<List<Franchise>> getAllFranchises() {
         List<Franchise> franchises = franchiseRepository.findAll();
@@ -29,6 +36,15 @@ public class FranchiseController {
         return new ResponseEntity<>(franchises, status);
     }
 
+
+    @Operation(summary = "Get a franchises by its id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the franchises",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Franchise.class)) }),
+            @ApiResponse(responseCode = "404", description = "Did not find the franchise",
+                    content = @Content),
+    })
     @GetMapping("/{id}")
     public ResponseEntity<Franchise> getFranchise(@PathVariable Long id) {
         Franchise returnFranchise = new Franchise();
@@ -44,6 +60,15 @@ public class FranchiseController {
         return new ResponseEntity<>(returnFranchise, status);
     }
 
+
+    @Operation(summary = "Add a franchises")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created the character",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Franchise.class)) }),
+            @ApiResponse(responseCode = "400", description = "Request contains bad syntax",
+                    content = @Content),
+    })
     @PostMapping
     public ResponseEntity<Franchise> addFranchise(@RequestBody Franchise franchise) {
         Franchise returnFranchise = franchiseRepository.save(franchise);
@@ -51,6 +76,14 @@ public class FranchiseController {
         return new ResponseEntity<>(returnFranchise, status);
     }
 
+
+    @Operation(summary = "Update a franchise by its id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Updated the character",
+                    content = @Content),
+            @ApiResponse(responseCode = "400", description = "Request contains bad syntax",
+                    content = @Content),
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Franchise> updateFranchise(@PathVariable Long id, @RequestBody Franchise franchise) {
         Franchise returnFranchise = new Franchise();
@@ -65,6 +98,17 @@ public class FranchiseController {
         return new ResponseEntity<>(returnFranchise, status);
     }
 
+
+    @Operation(summary = "Updates the movies in a franchise")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Updated movies in the franchise successfully",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Franchise.class)) }),
+            @ApiResponse(responseCode = "400", description = "Request contains bad syntax",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Did not find the franchise",
+                    content = @Content),
+    })
     @PutMapping("/{id}/movies")
     public ResponseEntity<Franchise> updateMoviesInFranchise(@PathVariable Long id, @RequestBody List<Long> movieIds) {
         Franchise returnFranchise = new Franchise();
@@ -85,6 +129,15 @@ public class FranchiseController {
     }
 
 
+    @Operation(summary = "Delete a franchise by its id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Deleted the franchise successfully",
+                    content = @Content),
+            @ApiResponse(responseCode = "400", description = "Request contains bad syntax",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Did not find the franchise",
+                    content = @Content),
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Franchise> deleteFranchise(@PathVariable Long id) {
         Franchise returnFranchise = new Franchise();
