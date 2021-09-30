@@ -70,8 +70,7 @@ public class Movie {
         return null;
     }
 
-    public Movie(long id, String title, String genre, int year, String director, String picture, String trailer, Set<Actor> actors, Franchise franchise) {
-        this.id = id;
+    public Movie(String title, String genre, int year, String director, String picture, String trailer, Set<Actor> actors, Franchise franchise) {
         this.title = title;
         this.genre = genre;
         this.year = year;

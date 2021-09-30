@@ -38,8 +38,7 @@ public class Franchise {
         return null;
     }
 
-    public Franchise(long id, String name, String description) {
-        this.id = id;
+    public Franchise(String name, String description) {
         this.name = name;
         this.description = description;
     }

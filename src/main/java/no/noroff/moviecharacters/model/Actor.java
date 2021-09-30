@@ -44,8 +44,7 @@ public class Actor {
         return null;
     }
 
-    public Actor(long id, String name, String alias, String gender, String picture) {
-        this.id = id;
+    public Actor(String name, String alias, String gender, String picture) {
         this.name = name;
         this.alias = alias;
         this.gender = gender;
