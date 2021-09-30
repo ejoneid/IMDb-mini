@@ -17,13 +17,13 @@ public class Actor {
     private long id;
 
     @NotNull
-    @Column(name="name", nullable = false)
+    @Column(name="name", nullable = false, length = 100)
     private String name;
 
-    @Column(name="alias")
+    @Column(name="alias", length = 100)
     private String alias;
 
-    @Column(name="gender")
+    @Column(name="gender", length = 7)
     private String gender;
 
     @Column(name="picture")

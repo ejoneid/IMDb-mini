@@ -16,11 +16,11 @@ public class Movie {
     private long id;
 
     @NotNull
-    @Column(name="title", nullable = false)
+    @Column(name="title", nullable = false, length = 200)
     private String title;
 
     @NotNull
-    @Column(name="genre", nullable = false)
+    @Column(name="genre", nullable = false, length = 100)
     private String genre; //Lists gave me an error, has this as a string for now.
 
     @NotNull
@@ -28,7 +28,7 @@ public class Movie {
     private int year;
 
     @NotNull
-    @Column(name="director", nullable = false)
+    @Column(name="director", nullable = false, length = 100)
     private String director;
 
     @Column(name="picture")
