@@ -38,4 +38,4 @@ by Spring Boot, and generates a visual doc with info about our API.
 The image below is a visual representation of the dataflow. A franchise is made up of one or many movies, and a movie 
 can belong to one franchise. An actor can act in one or many movies, and a movie can have one or many actors.
 
-![Dataflow in the application](https://gitlab.com/EirikJoneid/assignment3/-/raw/readme&varchar/dataflow.png)
+![Dataflow in the application](https://gitlab.com/EirikJoneid/assignment3/-/raw/master/dataflow.png)
