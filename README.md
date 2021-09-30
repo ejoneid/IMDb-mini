@@ -23,9 +23,7 @@ The API has functionality for:
 ## What do you have to do to run the application?
 
 First, clone the project by writing `git clone git@gitlab.com:EirikJoneid/assignment3.git` in the terminal of
-your choice. Make sure you have PostgreSQL installed, with pgAdmin 4. In the file `application.properties` you can
-change the credentials to match yours in pgAdmin 4. Then run the application, this seeds the database, and you're free to
-test the API.
+your choice. Make sure you have PostgreSQL installed with an empty database called `movieCharactersDB` intialized. In the file `application.properties` you can change the configuration to match your PostgreSQL configuration. Then run the application, this seeds the database, and you're free to test the API.
 
 ## Documentation by Swagger
 
