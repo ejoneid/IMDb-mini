@@ -1,5 +1,3 @@
-- Link to Swagger and/or other relevant links.
-
 # Assignment 3 - IMDb-mini 🎬
 
 This is a repository for a backend assignment for the Experis Accelerated Learning course. This application makes use of
