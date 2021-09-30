@@ -31,15 +31,10 @@ public class AppStartupRunner implements ApplicationRunner {
         //   FRANCHISES   //
         ////////////////////
 
-        // HARRY POTTER
         Franchise harryPotter = new Franchise(1, "Harry Potter", "All the Harry Potter movies are based off of J.K Rowlings best selling Harry potter book-series.");
-
-        // LORD OF THE RINGS
         Franchise lordOfTheRings = new Franchise(2, "The Lord of the Rings", "Lord of the Rings are written by J.R.R Tolkien");
 
-        // SAVE
-        franchiseRepository.save(harryPotter);
-        franchiseRepository.save(lordOfTheRings);
+        franchiseRepository.saveAll(Arrays.asList(harryPotter, lordOfTheRings));
 
         ////////////////////
         //    ACTORS      //
@@ -58,58 +53,30 @@ public class AppStartupRunner implements ApplicationRunner {
         // BOTH MOVIE FRANCHISES (Olivander and Voice of Aragorn in Animated Lord of the Rings in 1978)
         Actor johnHurt = new Actor(7, "John Hurt", "", "Male", "https://m.media-amazon.com/images/M/MV5BMTM1NTgyMTAyOV5BMl5BanBnXkFtZTcwMTE4MjQwNA@@._V1_UY317_CR5,0,214,317_AL_.jpg");
 
-        // SAVE
-        actorRepository.save(danielRadcliffe);
-        actorRepository.save(rupertGrint);
-        actorRepository.save(emmaWatson);
-        actorRepository.save(elijahWood);
-        actorRepository.save(ianMcKellen);
-        actorRepository.save(cateBlanchett);
-        actorRepository.save(johnHurt);
+        actorRepository.saveAll(Arrays.asList(danielRadcliffe, rupertGrint, emmaWatson, elijahWood, ianMcKellen, cateBlanchett, johnHurt));
 
         ////////////////////
         //    MOVIES      //
         ////////////////////
 
         // HARRY POTTER
-
-        Movie hpChamberOfSecrets = new Movie(1, "Harry Potter and the Chamber of Secrets", "Fantasy", 2002, "Chris Columbus", "", "https://www.youtube.com/watch?v=1bq0qff4iF8", Set.of(danielRadcliffe, emmaWatson, rupertGrint),
-                harryPotter);
-        Movie hpDeathlyHallowsOne = new Movie(2, "Harry Potter and the Deathly Hallows: Part 1", "Fantasy", 2010, "David Yates", "", "https://www.youtube.com/watch?v=MxqsmsA8y5k", Set.of(danielRadcliffe, emmaWatson, rupertGrint),
-                harryPotter);
-        Movie hpDeathlyHallowsTwo = new Movie(3, "Harry Potter and the Deathly Hallows: Part 2", "Fantasy", 2011, "David Yates", "", "https://www.youtube.com/watch?v=mObK5XD8udk", Set.of(danielRadcliffe, emmaWatson, rupertGrint),
-                harryPotter);
+        Movie hpPhilosophersStone = new Movie(1, "Harry Potter and the Philosopher's Stone", "Fantasy", 2001, "Chris Columbus", "", "https://www.youtube.com/watch?v=VyHV0BRtdxo", Set.of(danielRadcliffe, emmaWatson, rupertGrint), harryPotter);
+        Movie hpChamberOfSecrets = new Movie(2, "Harry Potter and the Chamber of Secrets", "Fantasy", 2002, "Chris Columbus", "", "https://www.youtube.com/watch?v=1bq0qff4iF8", Set.of(danielRadcliffe, emmaWatson, rupertGrint), harryPotter);
+        Movie hpDeathlyHallowsOne = new Movie(3, "Harry Potter and the Deathly Hallows: Part 1", "Fantasy", 2010, "David Yates", "", "https://www.youtube.com/watch?v=MxqsmsA8y5k", Set.of(danielRadcliffe, emmaWatson, rupertGrint), harryPotter);
+        Movie hpDeathlyHallowsTwo = new Movie(4, "Harry Potter and the Deathly Hallows: Part 2", "Fantasy", 2011, "David Yates", "", "https://www.youtube.com/watch?v=mObK5XD8udk", Set.of(danielRadcliffe, emmaWatson, rupertGrint), harryPotter);
 
         // LORD OF THE RINGS
-        Movie lotrAnimated = new Movie(4, "The Lord of the Rings", "Animation, Fantasy", 1978, "Ralph Bakshi", "", "https://www.youtube.com/watch?v=Y46VsU2RhrM", Set.of(johnHurt), lordOfTheRings);
-        Movie lotrFellowshipOfTheRing = new Movie(5, "The Lord of the Rings: Fellowship of the Ring", "Fantasy", 2001, "Peter Jackson", "", "https://www.youtube.com/watch?v=V75dMMIW2B4", Set.of(elijahWood, ianMcKellen, cateBlanchett), lordOfTheRings);
-        Movie lotrTheTwoTowers = new Movie(6, "The Lord of the Rings: The Two Towers", "Fantasy", 2002, "Peter Jackson", "", "https://www.youtube.com/watch?v=LbfMDwc4azU", Set.of(elijahWood, ianMcKellen, cateBlanchett), lordOfTheRings);
-        Movie lotrReturnOfTheKing = new Movie(7, "The Lord of the Rings: Return of the King", "Fantasy", 2003, "Peter Jackson", "", "https://www.youtube.com/watch?v=LbfMDwc4azU", Set.of(elijahWood, ianMcKellen, cateBlanchett), lordOfTheRings);
-
-        Movie hpPhilosophersStone = new Movie(8,
-                "Harry Potter and the Philosopher's Stone",
-                "Fantasy",
-                2001,
-                "Chris Columbus",
-                "",
-                "https://www.youtube.com/watch?v=VyHV0BRtdxo",
-                Set.of(danielRadcliffe, emmaWatson, rupertGrint),
-                harryPotter
-        );
+        Movie lotrAnimated = new Movie(5, "The Lord of the Rings", "Animation, Fantasy", 1978, "Ralph Bakshi", "", "https://www.youtube.com/watch?v=Y46VsU2RhrM", Set.of(johnHurt), lordOfTheRings);
+        Movie lotrFellowshipOfTheRing = new Movie(6, "The Lord of the Rings: Fellowship of the Ring", "Fantasy", 2001, "Peter Jackson", "", "https://www.youtube.com/watch?v=V75dMMIW2B4", Set.of(elijahWood, ianMcKellen, cateBlanchett), lordOfTheRings);
+        Movie lotrTheTwoTowers = new Movie(7, "The Lord of the Rings: The Two Towers", "Fantasy", 2002, "Peter Jackson", "", "https://www.youtube.com/watch?v=LbfMDwc4azU", Set.of(elijahWood, ianMcKellen, cateBlanchett), lordOfTheRings);
+        Movie lotrReturnOfTheKing = new Movie(8, "The Lord of the Rings: Return of the King", "Fantasy", 2003, "Peter Jackson", "", "https://www.youtube.com/watch?v=LbfMDwc4azU", Set.of(elijahWood, ianMcKellen, cateBlanchett), lordOfTheRings);
 
         hpPhilosophersStone.setFranchise(harryPotter);
         lotrAnimated.setFranchise(lordOfTheRings);
         lotrAnimated.setActors(Set.of(johnHurt));
 
         // SAVE
-        movieRepository.save(hpPhilosophersStone);
-        movieRepository.save(hpChamberOfSecrets);
-        movieRepository.save(hpDeathlyHallowsOne);
-        movieRepository.save(hpDeathlyHallowsTwo);
-        movieRepository.save(lotrAnimated);
-        movieRepository.save(lotrFellowshipOfTheRing);
-        movieRepository.save(lotrTheTwoTowers);
-        movieRepository.save(lotrReturnOfTheKing);
+        movieRepository.saveAll(Arrays.asList(hpPhilosophersStone, hpChamberOfSecrets, hpDeathlyHallowsOne, hpDeathlyHallowsTwo, lotrAnimated, lotrFellowshipOfTheRing, lotrTheTwoTowers, lotrReturnOfTheKing));
 
     }
 }
