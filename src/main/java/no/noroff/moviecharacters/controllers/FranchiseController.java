@@ -196,6 +196,7 @@ public class FranchiseController {
             status = HttpStatus.NOT_FOUND;
             return new ResponseEntity<>(returnFranchise, status);
         }
+        franchiseService.deleteMoviereferences(id);
         franchiseRepository.deleteById(id);
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnFranchise, status);

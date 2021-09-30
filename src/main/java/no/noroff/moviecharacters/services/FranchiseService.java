@@ -46,4 +46,15 @@ public class FranchiseService {
         franchiseRepository.save(franchise);
         return franchise;
     }
+
+    public void deleteMoviereferences(Long id) {
+        Franchise franchise = franchiseRepository.findById(id).get();
+        Set<Movie> movies = franchise.getMovies();
+
+        for (Movie movie : movies) {
+            movie.setFranchise(null);
+        }
+
+        movieRepository.saveAll(movies);
+    }
 }
